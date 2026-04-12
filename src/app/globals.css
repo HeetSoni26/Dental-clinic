@@ -1,0 +1,309 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary: var(--on-primary);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary: var(--on-secondary);
+  
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-on-tertiary: var(--on-tertiary);
+  
+  --color-surface: var(--surface);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-jakarta);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  
+  --shadow-editorial: var(--shadow-editorial);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   BASE
+──────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  cursor: none; /* Hidden for custom cursor on desktop */
+}
+
+@media (hover: none) {
+  html {
+    cursor: auto;
+  }
+}
+
+body {
+  background: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   NPROGRESS GOLD OVERRIDE
+──────────────────────────────────────────────────────────────── */
+#nprogress .bar {
+  background: linear-gradient(90deg, #C9A84C, #f0d080) !important;
+  height: 3px !important;
+  z-index: 9999 !important;
+}
+#nprogress .peg {
+  box-shadow: 0 0 10px #C9A84C, 0 0 5px #C9A84C !important;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   UTILITIES
+──────────────────────────────────────────────────────────────── */
+@layer utilities {
+  .editorial-shadow {
+    box-shadow: var(--shadow-editorial);
+  }
+  
+  .gold-glow:hover {
+    box-shadow: 0 0 0 1px var(--tertiary), 0 8px 32px rgba(201, 168, 76, 0.2);
+  }
+
+  .gold-glow-always {
+    box-shadow: 0 8px 32px rgba(201, 168, 76, 0.25);
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  /* Text gradient */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #C9A84C 0%, #f0d080 50%, #C9A84C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Zoom container — overflow hidden for Animation 6 */
+  .zoom-container {
+    overflow: hidden;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   KEYFRAME ANIMATIONS
+──────────────────────────────────────────────────────────────── */
+
+/* Marquee strip */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Loader progress bar */
+@keyframes loading {
+  0%   { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* WhatsApp pulse */
+@keyframes whatsapp-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+  50%       { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+}
+
+/* Fade up — for initial hero elements */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scale in */
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Word reveal (used in hero headline) */
+@keyframes word-reveal {
+  from { opacity: 0; transform: rotateX(90deg) translateY(20px); }
+  to   { opacity: 1; transform: rotateX(0deg) translateY(0); }
+}
+
+/* Shimmer for skeleton loaders */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Booking step bounce click */
+@keyframes step-bounce {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.06); }
+  70%  { transform: scale(0.98); }
+  100% { transform: scale(1); }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   ANIMATION UTILITY CLASSES
+──────────────────────────────────────────────────────────────── */
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s ease-out forwards;
+}
+
+.animate-word {
+  display: inline-block;
+  animation: word-reveal 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  opacity: 0;
+  perspective: 800px;
+}
+
+/* Reveal initial state (GSAP sets final) */
+.reveal-child {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Mask reveal initial (GSAP sets final) */
+.mask-reveal {
+  clip-path: inset(0 100% 0 0);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   DOCTOR CARD — No flip, clean hover overlay
+──────────────────────────────────────────────────────────────── */
+.doctor-card {
+  /* no perspective needed */
+}
+
+.doctor-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Front stays fully visible always */
+.doctor-card-front {
+  position: absolute;
+  inset: 0;
+}
+
+/* Back slides up from bottom on hover */
+.doctor-card-back {
+  position: absolute;
+  inset: 0;
+  transform: translateY(100%);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.doctor-card:hover .doctor-card-back {
+  transform: translateY(0);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   BUTTON MICRO-INTERACTIONS — Animation 8
+──────────────────────────────────────────────────────────────── */
+button, a[role="button"] {
+  cursor: none;
+}
+
+@media (hover: none) {
+  button, a[role="button"] {
+    cursor: auto;
+  }
+}
+
+/* Global button hover scale */
+button:not(.no-scale):hover {
+  transform: scale(1.03);
+}
+button:not(.no-scale):active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease-out !important;
+}
+
+/* Form input gold focus ring — Animation 8 */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #C9A84C !important;
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.12);
+  outline: none;
+}
+
+/* Nav active underline slide — already using CSS ::after */
+
+/* ────────────────────────────────────────────────────────────────
+   SCROLL PROGRESS BAR — Animation 10
+──────────────────────────────────────────────────────────────── */
+#scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #C9A84C, #f0d080);
+  z-index: 9997;
+  transition: width 0.1s linear;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   BOOKING STEP TILE — Animation 8
+──────────────────────────────────────────────────────────────── */
+.step-tile {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.step-tile.active,
+.step-tile:focus {
+  transform: scale(1.05);
+  border-color: #C9A84C !important;
+  box-shadow: 0 8px 32px rgba(201, 168, 76, 0.2);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   BOOKING PROGRESS BAR — Animation 8
+──────────────────────────────────────────────────────────────── */
+.booking-progress-fill {
+  transition: width 0.4s ease-out;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   BLOG TOC — Animation 10
+──────────────────────────────────────────────────────────────── */
+.toc-link {
+  transition: color 0.2s ease, border-color 0.2s ease, padding-left 0.2s ease;
+}
+.toc-link.active {
+  color: #C9A84C;
+  border-left-color: #C9A84C;
+  padding-left: 12px;
+}

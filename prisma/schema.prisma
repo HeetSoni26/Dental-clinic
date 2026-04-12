@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Patient {
+  id            String    @id @default(cuid())
+  name          String
+  phone         String    @unique
+  email         String?   @unique
+  passwordHash  String?
+  createdAt     DateTime  @default(now())
+  appointments  Appointment[]
+  records       DentalRecord[]
+  membership    Membership?
+}
+
+model Doctor {
+  id            String    @id @default(cuid())
+  name          String
+  specialization String
+  photo         String
+  bio           String
+  experience    Int
+  qualifications String[]
+  appointments  Appointment[]
+}
+
+model Service {
+  id            String    @id @default(cuid())
+  name          String
+  slug          String    @unique
+  description   String
+  price         Int
+  category      String
+  appointments  Appointment[]
+}
+
+model Appointment {
+  id            String    @id @default(cuid())
+  patientId     String
+  doctorId      String
+  serviceId     String
+  date          DateTime
+  timeSlot      String
+  status        String    @default("pending")
+  notes         String?
+  createdAt     DateTime  @default(now())
+  patient       Patient   @relation(fields: [patientId], references: [id])
+  doctor        Doctor    @relation(fields: [doctorId], references: [id])
+  service       Service   @relation(fields: [serviceId], references: [id])
+}
+
+model DentalRecord {
+  id            String    @id @default(cuid())
+  patientId     String
+  title         String
+  fileUrl       String
+  createdAt     DateTime  @default(now())
+  patient       Patient   @relation(fields: [patientId], references: [id])
+}
+
+model Membership {
+  id            String    @id @default(cuid())
+  patientId     String    @unique
+  plan          String
+  startDate     DateTime
+  endDate       DateTime
+  status        String
+  patient       Patient   @relation(fields: [patientId], references: [id])
+}
+
+model BlogPost {
+  id            String    @id @default(cuid())
+  title         String
+  slug          String    @unique
+  content       String
+  excerpt       String
+  category      String
+  author        String
+  readTime      Int
+  coverImage    String
+  publishedAt   DateTime  @default(now())
+}
+
+model ContactLead {
+  id            String    @id @default(cuid())
+  name          String
+  phone         String
+  email         String?
+  service       String?
+  message       String?
+  createdAt     DateTime  @default(now())
+}

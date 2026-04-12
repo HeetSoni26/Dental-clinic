@@ -1,0 +1,44 @@
+:root {
+  /* Surface / Background */
+  --surface: #FAF8FE;
+  --surface-container-lowest: #FFFFFF;
+  --surface-container-low: #F4F3F8;
+  --surface-container: #EEEDF3;
+  --surface-container-high: #E9E7ED;
+  --surface-container-highest: #E3E2E7;
+  
+  /* Brand Colors */
+  --primary: #0A1628; /* Deep Navy */
+  --primary-container: #101C2E;
+  --on-primary: #FFFFFF;
+  
+  --secondary: #55615D;
+  --secondary-container: #D8E5E0; /* Soft Mint */
+  --on-secondary: #FFFFFF;
+  
+  --tertiary: #C9A84C; /* Gold */
+  --tertiary-container: #C9A84C;
+  --on-tertiary: #FFFFFF;
+  
+  --error: #D32F2F;
+  --error-container: #FFDAD6;
+  
+  /* Text / On-Surface */
+  --on-surface: #1A1B1F;
+  --on-surface-variant: #45474C;
+  --outline: #75777D;
+  --outline-variant: #C5C6CD;
+
+  /* Typography */
+  --font-playfair: 'Playfair Display', serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+
+  /* Elevations & Shadows */
+  --shadow-editorial: 0px 24px 48px rgba(10, 22, 40, 0.06);
+  
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}
