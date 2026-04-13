@@ -141,3 +141,5 @@ export default function PortalDashboard() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';
